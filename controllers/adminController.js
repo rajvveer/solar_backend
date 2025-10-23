@@ -6,7 +6,6 @@ const WithdrawRequest = require('../models/WithdrawRequest');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-// ADMIN REGISTRATION
 exports.registerAdmin = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -25,7 +24,6 @@ exports.registerAdmin = async (req, res) => {
   }
 };
 
-// ADMIN LOGIN
 exports.adminLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -41,9 +39,6 @@ exports.adminLogin = async (req, res) => {
   }
 };
 
-// EMPLOYEE MANAGEMENT
-
-// Get all employees (without passwords)
 exports.getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find().select('-password');
@@ -54,7 +49,6 @@ exports.getAllEmployees = async (req, res) => {
   }
 };
 
-// Get employee details by ID
 exports.getEmployeeById = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id).select('-password');
@@ -66,7 +60,6 @@ exports.getEmployeeById = async (req, res) => {
   }
 };
 
-// Delete an employee by ID
 exports.deleteEmployee = async (req, res) => {
   try {
     const employee = await Employee.findByIdAndDelete(req.params.id);
@@ -78,9 +71,6 @@ exports.deleteEmployee = async (req, res) => {
   }
 };
 
-// CONTRACT MANAGEMENT
-
-// Get all contracts
 exports.getAllContracts = async (req, res) => {
   try {
     const contracts = await Contract.find();
@@ -91,8 +81,6 @@ exports.getAllContracts = async (req, res) => {
   }
 };
 
-// Approve a contract and distribute commissions.
-// Distribution: Level 6: ₹2500, Level 5: ₹1000, Level 4: ₹800, Level 3: ₹500, Level 2: ₹300, Level 1: ₹200.
 exports.approveContract = async (req, res) => {
   const { id } = req.params;
   try {
@@ -126,7 +114,6 @@ exports.approveContract = async (req, res) => {
   }
 };
 
-// Reject a contract
 exports.rejectContract = async (req, res) => {
   const { id } = req.params;
   try {
@@ -143,9 +130,6 @@ exports.rejectContract = async (req, res) => {
   }
 };
 
-// COMMISSION MANAGEMENT
-
-// Get all commission records
 exports.getAllCommissions = async (req, res) => {
   try {
     const commissions = await CommissionRecord.find();
@@ -156,9 +140,6 @@ exports.getAllCommissions = async (req, res) => {
   }
 };
 
-// WITHDRAW REQUEST MANAGEMENT
-
-// Get all withdraw requests
 exports.getWithdrawRequests = async (req, res) => {
   try {
     const withdraws = await WithdrawRequest.find().populate('employee', 'name email');
@@ -169,8 +150,6 @@ exports.getWithdrawRequests = async (req, res) => {
   }
 };
 
-// Update a withdraw request status (approve or reject)
-// If approved, update the employee's withdrawnAmount accordingly.
 exports.updateWithdrawRequest = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body; 

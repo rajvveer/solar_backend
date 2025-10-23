@@ -9,14 +9,12 @@ dotenv.config();
 
 const app = express();
 
-// Enable CORS for requests coming from http://localhost:3000
 app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use(express.json());
 
 app.use('/api', apiRoutes);
 
-// Set up admin API routes
 app.use('/api/admin', adminRoutes);
 
 connectDB();
