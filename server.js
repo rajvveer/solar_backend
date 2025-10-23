@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: 'https://loquacious-biscuit-720b4a.netlify.app/' }));
+app.use(cors({ origin: 'https://solaramb.netlify.app' }));
 
 app.use(express.json());
 
