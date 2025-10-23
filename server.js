@@ -18,6 +18,13 @@ app.use('/api', apiRoutes);
 app.use('/api/admin', adminRoutes);
 
 connectDB();
+app.get('/health', (req, res) => {
+  res.sendStatus(200);
+});
+
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  require('./keepAlive'); // keeps server alive
+});
