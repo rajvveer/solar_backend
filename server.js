@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: 'https://solaramb.netlify.app' }));
+app.use(cors({ origin: 'https://warm-croquembouche-6ee21f.netlify.app' }));
 
 app.use(express.json());
 
